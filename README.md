@@ -200,20 +200,7 @@ Nếu bạn thấy dự án hữu ích:
 * ⭐ Hãy cho repo một Star trên GitHub
 * 📣 Chia sẻ cho bạn bè cùng học DevOps / Cloud
 
-Chúc bạn học tốt và quản lý VPS hiệu quả! 🚀
+Chúc bạn quản lý VPS hiệu quả! 🚀
 
 ```
 
----
-
-## 🔥 ĐÁNH GIÁ RIÊNG CHO README NÀY
-
-Bản này:
-
-- ✅ Chuẩn GitHub open-source  
-- ✅ Chuẩn đồ án đại học / thạc sĩ  
-- ✅ Văn phong chuyên nghiệp  
-- ✅ Có hướng dẫn – cấu hình – cảnh báo – bảo mật  
-
-
-```
