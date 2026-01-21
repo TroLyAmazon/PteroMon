@@ -189,7 +189,7 @@ Mọi ý kiến đóng góp, báo lỗi hoặc đề xuất tính năng đều r
 ## 📜 Giấy phép
 
 Dự án được phát hành với mục đích **học tập, nghiên cứu và sử dụng cá nhân**.
-Bạn có thể tự do chỉnh sửa và sử dụng cho đồ án hoặc quản lý VPS riêng.
+Bạn có thể tự do chỉnh sửa quản lý VPS riêng.
 
 ---
 
