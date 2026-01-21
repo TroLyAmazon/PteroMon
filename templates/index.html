@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Giám sát VPS</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div>
+        <h1>Giám sát VPS</h1>
+        <div class="sub">CPU / RAM / SWAP / Disk • biểu đồ realtime • cảnh báo tự động</div>
+      </div>
+
+      <div class="chip">
+        <span>🕒</span><span id="ts">—</span>
+        <span class="dot">•</span>
+        <span id="health" class="health ok">ỔN</span>
+        <span class="dot">•</span>
+        <a href="/api/stats">API</a>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- CPU -->
+      <section class="card">
+        <div class="label">CPU đang dùng</div>
+        <div class="value"><span id="cpu">—</span><span class="unit">%</span></div>
+        <div class="bar"><div class="fill" id="cpuBar"></div></div>
+        <div class="row">
+          <span id="cpuModel" class="mono">—</span>
+        </div>
+        <div class="row">
+          <span>Core / Thread</span>
+          <span><b id="cpuCores">—</b> / <b id="cpuThreads">—</b></span>
+        </div>
+        <div class="row">
+          <span>Kiến trúc</span>
+          <span class="mono" id="cpuArch">—</span>
+        </div>
+      </section>
+
+      <!-- RAM -->
+      <section class="card">
+        <div class="label">RAM</div>
+        <div class="value"><span id="ramPct">—</span><span class="unit">%</span></div>
+        <div class="bar"><div class="fill" id="ramBar"></div></div>
+        <div class="row">
+          <span><span id="ramUsed">—</span> MB đã dùng</span>
+          <span><span id="ramTotal">—</span> MB tổng</span>
+        </div>
+        <div class="row hint" id="ramWarn">—</div>
+      </section>
+
+      <!-- Charts -->
+      <section class="card span12">
+        <div class="label">Biểu đồ realtime</div>
+        <div class="charts">
+          <div class="chartBox">
+            <div class="chartTitle">CPU (%)</div>
+            <canvas id="cpuChart"></canvas>
+          </div>
+          <div class="chartBox">
+            <div class="chartTitle">RAM (%)</div>
+            <canvas id="ramChart"></canvas>
+          </div>
+        </div>
+        <div class="row small">
+          <span>Gợi ý: nếu tab không mở thì không tốn request.</span>
+          <span>Refresh: <b>2s</b></span>
+        </div>
+      </section>
+
+      <!-- Disk -->
+      <section class="card mini">
+        <div class="label">Ổ đĩa</div>
+        <div class="value"><span id="diskPct">—</span><span class="unit">%</span></div>
+        <div class="bar"><div class="fill" id="diskBar"></div></div>
+        <div class="row">
+          <span><span id="diskUsed">—</span> GB</span>
+          <span><span id="diskTotal">—</span> GB</span>
+        </div>
+      </section>
+
+      <!-- Swap -->
+      <section class="card mini">
+        <div class="label">SWAP</div>
+        <div class="value"><span id="swapPct">—</span><span class="unit">%</span></div>
+        <div class="bar"><div class="fill" id="swapBar"></div></div>
+        <div class="row">
+          <span><span id="swapUsed">—</span> MB</span>
+          <span><span id="swapTotal">—</span> MB</span>
+        </div>
+      </section>
+
+      <!-- Status -->
+      <section class="card mini">
+        <div class="label">Trạng thái</div>
+        <div class="value small"><span id="status">Đang chạy</span> ✅</div>
+        <div class="row">
+          <span>Cảnh báo</span>
+          <span class="mono" id="alerts">—</span>
+        </div>
+        <div class="row small">
+          <span>API</span>
+          <span class="mono">/api/stats</span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Gọn 1 trang • Phù hợp Pterodactyl “upload & run”.</span>
+      <span class="mono">Tip: reverse proxy qua Caddy/Nginx để có HTTPS.</span>
+    </footer>
+  </div>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
+CPU
+
+<!-- < 75% → OK
+75–89% → ⚠️ CẢNH BÁO
+≥ 90% → 🔴 NGUY HIỂM
+RAM
+< 80% → OK
+80–91% → ⚠️ CẢNH BÁO
+≥ 92% → 🔴 NGUY HIỂM
+
+SWAP
+< 30% → OK
+30–59% → ⚠️ CẢNH BÁO
+≥ 60% → 🔴 NGUY HIỂM -->
